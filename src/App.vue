@@ -1,30 +1,21 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="min-h-screen bg-white">
+    <component :is="layout">
+      <router-view />
+    </component>
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script setup>
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import AdminLayout from './layouts/AdminLayout.vue';
+import MainLayout from './layouts/MainLayout.vue';
 
-nav {
-  padding: 30px;
-}
+const route = useRoute();
+const currentLayout = ref(route.path.startsWith('/admin') ? AdminLayout : MainLayout);
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+const layout = computed(() => {
+  return currentLayout.value;
+});
+</script>
