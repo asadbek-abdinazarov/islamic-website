@@ -1,4 +1,4 @@
-# sayfulloh_portfolio
+# islamic website portfolio
 
 ## Project setup
 ```
